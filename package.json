@@ -1,0 +1,25 @@
+{
+  "name": "jhcr-cli",
+  "version": "0.0.1",
+  "description": "jhcr command line interface",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmilad/jhcr-cli.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmilad/jhcr-cli/issues"
+  },
+  "homepage": "https://github.com/mmilad/jhcr-cli#readme",
+  "preferGlobal": true,
+  "bin": {
+    "jhcr": "index.js"
+  },
+  "dependencies": {
+    "jhcr": "git://github.com/mmilad/jhcr.git"
+  }
+}
