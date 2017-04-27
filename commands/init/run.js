@@ -2,8 +2,10 @@ var fs = require('fs');
 exports.run = function(config) {
     devDir = config.devDir;
     var exec = require('child_process').exec;
-    // exec('npm install --prefic '+pathString+' git://github.com/mmilad/jhcr --save');
-    exec('npm init');
+    if (!fs.existsSync(jhcrPath+'node_modules/jhcr/dist/jhcr.js')) {
+        exec('npm install --prefic '+pathString+' git://github.com/mmilad/jhcr --save');
+    }
+    // exec('npm init');
     fs.mkdir(devDir, function (err) {
         fs.mkdir(devDir+'/src', function (err) {
             fs.writeFile(devDir+'/src/index.html', INDEX);
