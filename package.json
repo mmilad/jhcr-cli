@@ -20,6 +20,8 @@
     "jhcr": "index.js"
   },
   "dependencies": {
-    "jhcr": "git://github.com/mmilad/jhcr.git"
+    "buildify": "^0.4.0",
+    "jhcr": "git://github.com/mmilad/jhcr.git",
+    "reload": "^1.1.2"
   }
 }
