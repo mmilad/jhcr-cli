@@ -2,8 +2,8 @@ var fs = require('fs');
 exports.run = function(config) {
     devDir = config.devDir;
     var exec = require('child_process').exec;
-    if (!fs.existsSync(jhcrPath+'node_modules/jhcr/dist/jhcr.js')) {
-        exec('npm install --prefic '+pathString+' git://github.com/mmilad/jhcr --save');
+    if (!fs.existsSync(devDir+'node_modules/jhcr/dist/jhcr.js')) {
+        exec('npm install jhcr --save');
     }
     // exec('npm init');
     fs.mkdir(devDir, function (err) {
