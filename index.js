@@ -3,25 +3,24 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 var path = require('path');
 var jhcrPath = process.argv[1].replace('index.js','').replace(/\\/g,'/');;
-var projectPath = path.dirname(fs.realpathSync(__filename));
+var cliPath = path.dirname(fs.realpathSync(__filename));
 var userArgs = process.argv.slice(2);
 var devDir = "dev";
 // on init
+// console.log("jhcr path: ", jhcrPath)
+// console.log("cliPath path: ", cliPath)
+// console.log("devDir path: ", devDir)
 if(userArgs.length ===1 ) {
     if (fs.existsSync(jhcrPath+'commands/'+userArgs[0]+'/run.js')) {
         var init = require(jhcrPath+'commands/'+userArgs[0]+'/run.js');
         init.run({
             jhcrPath: jhcrPath,
-            devDir:devDir
+            devDir:devDir,
+            cliPath: cliPath
         });
     } else {
         console.log("command not found")
     }
-    // if(userArgs[0] === "init") {
-    //     var init = require('./commands/'+userArgs[0]+'/run.js');
-    //     init.run({devDir:devDir});
-    // } else if(userArgs[0] === "build") {
-    // 
 } else {
 // create start 
 if((userArgs[0] === "n") || (userArgs[0] === "new")) {
@@ -29,7 +28,7 @@ if((userArgs[0] === "n") || (userArgs[0] === "new")) {
         if(userArgs[2]) {
             fs.mkdir(devDir+'/src/components/'+userArgs[2], function(err) {
                 fs.writeFile(devDir+'/src/components/'+userArgs[2]+'/component.js', `
-J.registry.`+userArgs[2]+` = {
+J.registry["`+userArgs[2]+`"] = {
     onSet = function (elem) {
         elem.innerHTML = "Hello World!";
     }
