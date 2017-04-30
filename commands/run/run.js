@@ -1,6 +1,23 @@
-
-var exec = require('child_process').exec;
+var fs = require('fs'),
+    bs = require('browser-sync').create(),
+    testIndex = "";
 exports.run = function (config) {
-    devDir = config.devDir;
-        exec('reload --dir src -b 4000');
+    testIndex = require(config.jhcrPath+'/commands/run/initializer.js').run(config)
+    fs.writeFile(config.devDir+'/index.html', testIndex, function(e) {
+        if(e) {
+            console.log(e)
+        }
+        bs.init({
+            server: config.devDir+'/'
+        });
+        bs.watch(config.devDir+'/').on("change", function(changedFile){
+                console.log(changedFile)
+            fs.writeFile(config.devDir+'/index.html', testIndex, function(err) {
+                if(err) {
+                    console.log(err)
+                }
+                bs.reload()
+            });
+        });
+    });
 }

@@ -2,9 +2,17 @@ var fs = require('fs');
 var path = require('path');
 
 exports.run = function(config) {
-    var devDir = config.devDir;
-    copyFile(devDir+"/src/index.html", devDir+"/build/index.html");
-    copyFolderRecursiveSync(devDir+"/src/assets", devDir+"/build/src");
+    fs.lstat(config.from, function(err, stats) {
+        if(err) {
+            return console.log("cannot copy", err.path)
+        }
+        
+        if(stats.isFile()) {
+            copyFile(config.from, config.to);
+        } else {
+            copyFolderRecursiveSync(config.from, config.to);
+        }
+    });
 }
 function copyFile(source, target, cb) {
     var cbCalled = false;
